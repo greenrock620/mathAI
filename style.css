@@ -1,0 +1,64 @@
+/* 基础样式 */
+body {
+    font-family: 'Segoe UI', '微软雅黑', sans-serif;
+    background: #f5f7fa;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+}
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+/* 按钮样式 */
+#generateBtn {
+    display: block;
+    width: 200px;
+    margin: 0 auto 30px;
+    padding: 12px 24px;
+    font-size: 18px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+#generateBtn:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,123,255,0.3);
+}
+/* 题目区域 */
+.question-box {
+    min-height: 200px;
+    padding: 20px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    background: #f8f9fa;
+}
+#questionText {
+    font-size: 20px;
+    white-space: pre-wrap;
+    margin: 15px 0;
+}
+
+/* 加载动画 */
+.loader {
+    width: 30px;
+    height: 30px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 50px auto;
+    display: none;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
