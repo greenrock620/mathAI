@@ -2,6 +2,10 @@
 const API_KEY = '0154612d-b2a1-4fa6-a644-a58a97a79496'; // 替换为火山引擎获取的真实密钥
 const API_URL = 'https://ark.cn-beijing.volces.com/api/v3/chat/completions';
 // DOM元素
+
+// 公共cors-anywhere代理URL
+const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+
 const btn = document.getElementById('generateBtn');
 const questionText = document.getElementById('questionText');
 const loader = document.querySelector('.loader');
@@ -13,9 +17,9 @@ async function generateQuestion() {
         questionText.textContent = '';
         loader.style.display = 'block';
         // 调用API
-        const response = await fetch(API_URL, {
+        const response = await fetch(proxyUrl+API_URL, {
             method: 'POST',
-        //    mode: 'cors', // 明确声明跨域模式
+           //mode: 'cors', // 明确声明跨域模式
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${API_KEY}`
