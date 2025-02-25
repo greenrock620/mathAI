@@ -4,7 +4,7 @@ const API_URL = 'https://ark.cn-beijing.volces.com/api/v3/chat/completions';
 // DOM元素
 
 // 公共cors-anywhere代理URL
-const proxyUrl = 'https://0038-2408-8207-6c83-1690-a934-629d-a7c3-10b5.ngrok-free.app';
+const proxyUrl = 'https://0038-2408-8207-6c83-1690-a934-629d-a7c3-10b5.ngrok-free.app/';
 
 // 正确拼接 URL
 const fullUrl = proxyUrl + API_URL.replace(/^https?:\/\//, '');
