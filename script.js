@@ -4,7 +4,10 @@ const API_URL = 'https://ark.cn-beijing.volces.com/api/v3/chat/completions';
 // DOM元素
 
 // 公共cors-anywhere代理URL
-const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+const proxyUrl = 'http://localhost:8080/';
+
+// 正确拼接 URL
+const fullUrl = proxyUrl + API_URL.replace(/^https?:\/\//, '');
 
 const btn = document.getElementById('generateBtn');
 const questionText = document.getElementById('questionText');
@@ -17,7 +20,7 @@ async function generateQuestion() {
         questionText.textContent = '';
         loader.style.display = 'block';
         // 调用API
-        const response = await fetch(proxyUrl+API_URL, {
+        const response = await fetch(fullUrl, {
             method: 'POST',
            //mode: 'cors', // 明确声明跨域模式
             headers: {
