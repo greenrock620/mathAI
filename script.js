@@ -1,7 +1,6 @@
 // 配置API参数（必须修改）
 const API_KEY = '0154612d-b2a1-4fa6-a644-a58a97a79496'; // 替换为火山引擎获取的真实密钥
 const API_URL = 'https://ark.cn-beijing.volces.com/api/v3/chat/completions';
-// DOM元素
 
 // 公共cors-anywhere代理URL
 const proxyUrl = 'https://0038-2408-8207-6c83-1690-a934-629d-a7c3-10b5.ngrok-free.app/';
@@ -9,9 +8,11 @@ const proxyUrl = 'https://0038-2408-8207-6c83-1690-a934-629d-a7c3-10b5.ngrok-fre
 // 正确拼接 URL
 const fullUrl = proxyUrl + API_URL.replace(/^https?:\/\//, '');
 
+// DOM元素
 const btn = document.getElementById('generateBtn');
 const questionText = document.getElementById('questionText');
 const loader = document.querySelector('.loader');
+
 // 生成题目函数
 async function generateQuestion() {
     try {
@@ -19,10 +20,10 @@ async function generateQuestion() {
         btn.disabled = true;
         questionText.textContent = '';
         loader.style.display = 'block';
+
         // 调用API
         const response = await fetch(fullUrl, {
             method: 'POST',
-           //mode: 'cors', // 明确声明跨域模式
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${API_KEY}`
@@ -35,13 +36,9 @@ async function generateQuestion() {
                 }],
             })
         });
-       
-       
 
-
-        // 修改响应处理逻辑（假设API返回结构为火山引擎标准格式）
+        // 处理响应
         const data = await response.json();
-        // 提取题目内容
         const content = data.choices?.[0]?.message?.content || "";
 
         // 使用正则表达式提取题目部分
@@ -51,16 +48,26 @@ async function generateQuestion() {
         // 显示题目
         questionText.textContent = question;
 
+        // 如果题目生成成功，启用按钮
+        if (questionText.textContent.trim() !== "") {
+            btn.disabled = false;
+        }
 
     } catch (error) {
         console.error('发生错误:', error);
         questionText.textContent = '题目生成失败，请点击按钮重试';
     } finally {
-        btn.disabled = false;
         loader.style.display = 'none';
     }
 }
+
 // 绑定事件
 btn.addEventListener('click', generateQuestion);
+
 // 页面加载时生成第一题
 window.addEventListener('load', generateQuestion);
+
+// 监听文本框内容变化，控制按钮状态
+questionText.addEventListener('input', () => {
+    btn.disabled = questionText.textContent.trim() === "";
+});
